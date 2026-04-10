@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/Abhishek/Desktop/Docker Learning/ML Workflow/mlruns/517508533121575512/models/m-182fa1b293404973904d800bb7df39cb/artifacts
+creation_timestamp: 1775822504623
+experiment_id: '517508533121575512'
+last_updated_timestamp: 1775822510729
+model_id: m-182fa1b293404973904d800bb7df39cb
+model_type: null
+name: model
+source_run_id: bd9a3481717c4c3ea3f4181c30c5eb9d
+status: 2
+status_message: null

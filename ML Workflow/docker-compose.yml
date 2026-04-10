@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  sleep-efficiency-app:
+    build: .
+    image: abhipara2002/mlworkflow-sleep-efficiency-app:latest
+    container_name: sleep-efficiency-predictor
+    ports:
+      - "8501:8500"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - STREAMLIT_SERVER_PORT=8500
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    command: streamlit run app.py --server.port=8500 --server.address=0.0.0.0

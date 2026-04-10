@@ -2,6 +2,13 @@ import streamlit as st
 import joblib
 import os
 import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+import sys
+
+# Add parent directory to path to import src modules
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.data_preprocessing import scale_features, encoding, load_scaler
 
 # Page Setup
 st.set_page_config(
@@ -11,30 +18,57 @@ st.set_page_config(
 )
 
 # Get the absolute path to the models directory
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_DIR = os.path.join(BASE_DIR, "models")
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# MODEL_DIR = os.path.join(BASE_DIR, "models")
 
-# Cache the model loading to avoid reloading on every slider change
+# Cache the model and scaler loading to avoid reloading on every slider change
 @st.cache_resource
-def load_model():
-    model_path = os.path.join(MODEL_DIR, "SEP_Baseline_xgboost.jbl")
-    
-    if not os.path.exists(model_path):
-        return None
-    
-    try:
-        model = joblib.load(model_path)
-        return model
-    except Exception as e:
-        return None
+def load_model_and_scaler():
+    if os.path.exists("/app/models/SEP_Baseline_xgboost.jbl"):  # Inside Docker
+        model_path = "/app/models/SEP_Baseline_xgboost.jbl"
+        scaler_path = "/app/models/scaler.joblib"
+    elif os.path.exists("models/SEP_Baseline_xgboost.jbl"):  # Local Run
+        model_path = "models/SEP_Baseline_xgboost.jbl"
+        scaler_path = "models/scaler.joblib"
+    else:
+        model_path = None
+        scaler_path = None
 
-# Load model once
-model = load_model()
+    # model_path = os.path.join(MODEL_DIR, "SEP_Baseline_xgboost.jbl")
+    # scaler_path = os.path.join(MODEL_DIR, "scaler.joblib")
+    
+    model = None
+    scaler = None
+    
+    if os.path.exists(model_path):
+        try:
+            model = joblib.load(model_path)
+        except Exception as e:
+            st.error(f"Error loading model: {e}")
+            return None, None
+    else:
+        st.error("⚠️ Model file not found.")
+    
+    if os.path.exists(scaler_path):
+        try:
+            scaler = joblib.load(scaler_path)
+        except Exception as e:
+            st.error(f"Error loading scaler: {e}")
+            return model, None
+    else:
+        st.error("⚠️ Scaler file not found.")
+    
+    return model, scaler
+
+# Load model and scaler
+model, scaler = load_model_and_scaler()
 
 # Show toast messages only once using session state
 if "model_loaded_toast" not in st.session_state:
-    if model is not None:
-        st.toast("✅ Model loaded successfully")
+    if model is not None and scaler is not None:
+        st.toast("✅ Model and scaler loaded successfully")
+    elif model is not None:
+        st.toast("⚠️ Model loaded but scaler not found")
     else:
         st.toast("❌ Model not found")
     st.session_state.model_loaded_toast = True
@@ -43,10 +77,8 @@ if "model_loaded_toast" not in st.session_state:
 # User Interface
 st.title("🥱 Sleep :blue[Efficiency] Predictor")
 st.write("""
-Welcome to the Food Image Predictor! This web app uses a deep learning model (EfficientNetB0) to identify different food items from images. 
-With **81% accuracy**, it can classify 101 types of delicious dishes like pizza, sushi, tacos, and more.
-         
-> Check the **Code of the model** on my [GitHub](https://github.com/abhi24112/Streamlit_app_food101)
+Welcome to the Sleep Efficiency Predictor! This web app uses machine learning models (XGBoost and Gradient Boosting) 
+to predict your sleep efficiency based on various health and lifestyle factors.
          
 > My Portfolio : [Abhishek Portfolio](https://www.abhiprajapati.me/)
 """)
@@ -75,11 +107,24 @@ gender_encoded = 0 if gender == "Male" else 1
 smoking_encoded = 0 if smoking == "Non-Smoker" else 1
 
 def prediction():
-    f = np.array([[age, gender_encoded, sleep_duration, rem_sleep, deep_sleep,
-                        light_sleep, awakenings, caffeine, alcohol, smoking_encoded, exercise]]            
-                )
+    """Make prediction with proper scaling."""
+    # Create a DataFrame with the input features
+    feature_names = ['Age', 'Gender', 'Sleep duration', 'REM sleep percentage', 
+                     'Deep sleep percentage', 'Light sleep percentage', 'Awakenings', 
+                     'Caffeine consumption', 'Alcohol consumption', 'Smoking status', 
+                     'Exercise frequency']
+    
+    input_array = np.array([[age, gender_encoded, sleep_duration, rem_sleep, deep_sleep,
+                            light_sleep, awakenings, caffeine, alcohol, smoking_encoded, exercise]])
+    
+    input_df = pd.DataFrame(input_array, columns=feature_names)
+    
     try:
-        pred = model.predict(f)
+        # Apply scaling using the pre-fitted scaler
+        scaled_df, _ = scale_features(input_df, scaler=scaler)
+        
+        # Get prediction
+        pred = model.predict(scaled_df)
         return pred[0]
     except Exception as e:
         st.error(f"Prediction error: {e}")
@@ -87,9 +132,12 @@ def prediction():
 
 if st.sidebar.button("predict"):
     if model is None:
-        st.error("❌Model not found")
+        st.error("❌ Model not found")
+    elif scaler is None:
+        st.error("❌ Scaler not found. Please ensure scaler.joblib is in the models directory.")
     else:
         result = prediction()
-        if result is None:
-            st.error("❌Error in making predictions / check all values are correctly inserted.")
-        st.success(f"🌙 Your predicted sleep efficiency is **{(result* 100):.2f}%**")
+        if result is not None:
+            st.success(f"🌙 Your predicted sleep efficiency is **{(result * 100):.2f}%**")
+        else:
+            st.error("❌ Error in making predictions / check all values are correctly inserted.")
