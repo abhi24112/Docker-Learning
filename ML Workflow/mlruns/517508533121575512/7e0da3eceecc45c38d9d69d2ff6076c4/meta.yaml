@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/Abhishek/Desktop/Docker Learning/ML Workflow/mlruns/517508533121575512/7e0da3eceecc45c38d9d69d2ff6076c4/artifacts
+end_time: 1775749849170
+entry_point_name: ''
+experiment_id: '517508533121575512'
+lifecycle_stage: active
+run_id: 7e0da3eceecc45c38d9d69d2ff6076c4
+run_name: SEP_Tuned_gradient_boosting
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775749842789
+status: 3
+tags: []
+user_id: Abhishek

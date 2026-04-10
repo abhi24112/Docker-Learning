@@ -1,0 +1,73 @@
+2026-04-09 21:19:29,161 - root - INFO - Experiment None doesn't exists in the mlflow
+2026-04-09 21:19:29,178 - root - INFO - Mlflow Pipeline execution is started......
+2026-04-09 21:19:29,179 - root - INFO - Data file found at: C:\\Users\\Abhishek\\Desktop\\Docker Learning\\ML Workflow\\data\Sleep_Efficiency.csv
+2026-04-09 21:19:29,184 - root - INFO - Data loaded successfully: C:\\Users\\Abhishek\\Desktop\\Docker Learning\\ML Workflow\\data\Sleep_Efficiency.csv
+2026-04-09 21:19:29,184 - root - INFO - Data is import in df Dataframe successfully.
+2026-04-09 21:19:29,184 - root - INFO - Preprocesing and feature scaling running....
+2026-04-09 21:19:29,184 - root - INFO - Dropping the unwanted column from the data
+2026-04-09 21:19:29,201 - root - INFO - Encodding columns: Gender
+2026-04-09 21:19:29,202 - root - INFO - Encodding columns: Smoking status
+2026-04-09 21:19:29,203 - root - INFO - Label Encoding completed Successfully
+2026-04-09 21:19:29,209 - root - INFO - Preprocesing and feature scaling has been done successfully
+2026-04-09 21:19:29,209 - root - INFO - Splitting Data in training and testing dataframe
+2026-04-09 21:19:29,212 - root - INFO - Splitting of data in train and test is executed successfully
+2026-04-09 21:19:29,449 - root - INFO - =====================================xgboost============================================
+2026-04-09 21:19:29,449 - root - INFO - Creating xgboost Model
+2026-04-09 21:19:29,477 - root - INFO - xgboost trained successfully.
+2026-04-09 21:19:29,477 - root - INFO - xgboost trained successfully.
+2026-04-09 21:19:29,480 - root - INFO - Calculating Evaluation Matries for
+2026-04-09 21:19:29,481 - root - INFO - Checking the r2_score of the model
+2026-04-09 21:19:29,484 - root - INFO - The R2 score of the Regression Model is 86.4710
+2026-04-09 21:19:29,484 - root - INFO - Saving the Model in the Directory
+2026-04-09 21:19:29,487 - root - INFO - SEP_Baseline_xgboost dumped successfully.
+2026-04-09 21:19:37,664 - root - INFO - xgboost logged successfully in mlflow.
+2026-04-09 21:19:37,678 - root - INFO - xgboost parameters and metrics logged successfully in mlflow.
+2026-04-09 21:19:37,743 - root - INFO - =====================================gradient_boosting============================================
+2026-04-09 21:19:37,743 - root - INFO - Creating gradient_boosting Model
+2026-04-09 21:19:37,831 - root - INFO - gradient_boosting trained successfully.
+2026-04-09 21:19:37,831 - root - INFO - gradient_boosting trained successfully.
+2026-04-09 21:19:37,833 - root - INFO - Calculating Evaluation Matries for
+2026-04-09 21:19:37,834 - root - INFO - Checking the r2_score of the model
+2026-04-09 21:19:37,836 - root - INFO - The R2 score of the Regression Model is 85.7368
+2026-04-09 21:19:37,836 - root - INFO - Saving the Model in the Directory
+2026-04-09 21:19:37,843 - root - INFO - SEP_Baseline_gradient_boosting dumped successfully.
+2026-04-09 21:19:43,829 - root - INFO - gradient_boosting logged successfully in mlflow.
+2026-04-09 21:19:43,842 - root - INFO - gradient_boosting parameters and metrics logged successfully in mlflow.
+2026-04-09 21:19:43,847 - root - INFO - \U0001f389 Pipeline Execution Completed Successfully!
+2026-04-09 21:20:34,390 - root - INFO - Experiment <Experiment: artifact_location=('file:///C:/Users/Abhishek/Desktop/Docker Learning/ML '
+ 'Workflow/mlruns/517508533121575512'), creation_time=1775749769166, experiment_id='517508533121575512', last_update_time=1775749769166, lifecycle_stage='active', name='Sleep_Efficiency_Predictor', tags={}, trace_location=None, workspace='default'> already exists in the mlflow
+2026-04-09 21:20:34,392 - root - INFO - Mlflow Pipeline execution is started......
+2026-04-09 21:20:34,392 - root - INFO - Data file found at: C:\\Users\\Abhishek\\Desktop\\Docker Learning\\ML Workflow\\data\Sleep_Efficiency.csv
+2026-04-09 21:20:34,397 - root - INFO - Data loaded successfully: C:\\Users\\Abhishek\\Desktop\\Docker Learning\\ML Workflow\\data\Sleep_Efficiency.csv
+2026-04-09 21:20:34,398 - root - INFO - Data is import in df Dataframe successfully.
+2026-04-09 21:20:34,398 - root - INFO - Preprocesing and feature scaling running....
+2026-04-09 21:20:34,398 - root - INFO - Dropping the unwanted column from the data
+2026-04-09 21:20:34,421 - root - INFO - Encodding columns: Gender
+2026-04-09 21:20:34,422 - root - INFO - Encodding columns: Smoking status
+2026-04-09 21:20:34,422 - root - INFO - Label Encoding completed Successfully
+2026-04-09 21:20:34,427 - root - INFO - Preprocesing and feature scaling has been done successfully
+2026-04-09 21:20:34,427 - root - INFO - Splitting Data in training and testing dataframe
+2026-04-09 21:20:34,429 - root - INFO - Splitting of data in train and test is executed successfully
+2026-04-09 21:20:34,666 - root - INFO - =====================================xgboost============================================
+2026-04-09 21:20:34,666 - root - INFO - Creating xgboost Model
+2026-04-09 21:20:34,778 - root - INFO - xgboost trained successfully.
+2026-04-09 21:20:34,778 - root - INFO - xgboost trained successfully.
+2026-04-09 21:20:34,781 - root - INFO - Calculating Evaluation Matries for
+2026-04-09 21:20:34,783 - root - INFO - Checking the r2_score of the model
+2026-04-09 21:20:34,785 - root - INFO - The R2 score of the Regression Model is 82.8758
+2026-04-09 21:20:34,786 - root - INFO - Saving the Model in the Directory
+2026-04-09 21:20:34,793 - root - INFO - SEP_Tuned_xgboost dumped successfully.
+2026-04-09 21:20:42,751 - root - INFO - xgboost logged successfully in mlflow.
+2026-04-09 21:20:42,772 - root - INFO - xgboost parameters and metrics logged successfully in mlflow.
+2026-04-09 21:20:42,845 - root - INFO - =====================================gradient_boosting============================================
+2026-04-09 21:20:42,845 - root - INFO - Creating gradient_boosting Model
+2026-04-09 21:20:42,997 - root - INFO - gradient_boosting trained successfully.
+2026-04-09 21:20:42,997 - root - INFO - gradient_boosting trained successfully.
+2026-04-09 21:20:42,999 - root - INFO - Calculating Evaluation Matries for
+2026-04-09 21:20:43,002 - root - INFO - Checking the r2_score of the model
+2026-04-09 21:20:43,005 - root - INFO - The R2 score of the Regression Model is 83.9615
+2026-04-09 21:20:43,005 - root - INFO - Saving the Model in the Directory
+2026-04-09 21:20:43,016 - root - INFO - SEP_Tuned_gradient_boosting dumped successfully.
+2026-04-09 21:20:49,148 - root - INFO - gradient_boosting logged successfully in mlflow.
+2026-04-09 21:20:49,169 - root - INFO - gradient_boosting parameters and metrics logged successfully in mlflow.
+2026-04-09 21:20:49,173 - root - INFO - \U0001f389 Pipeline Execution Completed Successfully!

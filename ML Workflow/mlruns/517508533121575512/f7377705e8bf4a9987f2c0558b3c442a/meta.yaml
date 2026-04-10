@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/Abhishek/Desktop/Docker Learning/ML Workflow/mlruns/517508533121575512/f7377705e8bf4a9987f2c0558b3c442a/artifacts
+end_time: 1775749842773
+entry_point_name: ''
+experiment_id: '517508533121575512'
+lifecycle_stage: active
+run_id: f7377705e8bf4a9987f2c0558b3c442a
+run_name: SEP_Tuned_xgboost
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775749834612
+status: 3
+tags: []
+user_id: Abhishek

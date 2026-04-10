@@ -1,0 +1,8 @@
+artifact_location: file:///C:/Users/Abhishek/Desktop/Docker Learning/ML Workflow/mlruns/517508533121575512
+creation_time: 1775749769166
+experiment_id: '517508533121575512'
+last_update_time: 1775749769166
+lifecycle_stage: active
+name: Sleep_Efficiency_Predictor
+trace_location: null
+workspace: default
