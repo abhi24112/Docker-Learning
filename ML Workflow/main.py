@@ -8,7 +8,7 @@ import os
 from src.data_ingestion import reading_files
 from src.data_loader import loading_files
 from src.data_split import splitting_data
-from src.data_preprocessing import dropping_unwanted_cols, removing_outliers, scale_features, encoding
+from src.data_preprocessing import dropping_unwanted_cols, removing_outliers, scale_features, encoding, save_scaler
 from src.utils import load_config
 from src.evaluate import evaluate
 from src.model_training import model_training
@@ -58,7 +58,8 @@ def main():
         df = dropping_unwanted_cols(df)
         df = removing_outliers(df)
         df = encoding(df)
-        df = scale_features(df)
+        df, scaler = scale_features(df)
+        save_scaler(scaler)  # Save the scaler for later use in predictions
         logging.info(f"Preprocesing and feature scaling has been done successfully")
 
         # Splitting data in training and testing

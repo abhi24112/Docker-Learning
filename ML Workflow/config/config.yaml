@@ -2,7 +2,7 @@ mlflow:
   tracking_uri: "file:///C:/Users/Abhishek/Desktop/Docker Learning/ML Workflow/mlruns"
   experiment_name: "Sleep_Efficiency_Predictor"
   log_models: true
-  run_name: 'SEP_Tuned'
+  run_name: 'SEP_Baseline'
 
 data:
   test_size: 0.2

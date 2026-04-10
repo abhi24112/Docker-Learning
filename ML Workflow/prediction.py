@@ -1,7 +1,7 @@
 import joblib as jb
 import pandas as pd
 import numpy as np
-from src.data_preprocessing import scale_features, encoding
+from src.data_preprocessing import scale_features, encoding, load_scaler
 from src.utils import load_config
 
 # Load config to get run name
@@ -12,11 +12,20 @@ run_name = mlflow_config['run_name']
 xgb_model = jb.load(f"./models/{run_name}_xgboost.jbl")
 gb_model = jb.load(f"./models/{run_name}_gradient_boosting.jbl")
 
-print("✅ Models loaded successfully!")
+# Load the scaler used during training (optional)
+scaler = None
+try:
+    scaler = load_scaler()
+    print("✅ Models and scaler loaded successfully!")
+except FileNotFoundError:
+    print("⚠️  Models loaded, but scaler not found. Please run training first to create scaler.joblib")
 
 
 def predict(input_data):
     """Make predictions on input data."""
+    if scaler is None:
+        raise ValueError("Scaler not loaded. Please run training first to create scaler.joblib")
+    
     # input_data can be a DataFrame or dictionary
     if isinstance(input_data, dict):
         input_data = pd.DataFrame([input_data])
@@ -24,7 +33,7 @@ def predict(input_data):
     # Prepare data
     data = input_data.copy()
     data = encoding(data)
-    data = scale_features(data)
+    data, _ = scale_features(data, scaler=scaler)  # Use the pre-fitted scaler
     
     # Get predictions
     xgb_pred = xgb_model.predict(data)
