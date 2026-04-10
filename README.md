@@ -41,6 +41,7 @@ Welcome to the Docker Learning repository! 🚀 This project is a hands-on guide
 🔹 Volumes persist data, models, and logs between container runs.  
 🔹 Restart Policy ensures containers restart automatically if they fail. 🔄  
 🔹 Port Mapping exposes services like Streamlit on specific ports. 🌐
+🔹 Use my Docker Image: ```docker pull abhipara2002/mlworkflow-sleep-efficiency-app```
 
 ### 2️⃣ **Dockerfile - Building the Container**
 
