@@ -1,0 +1,4 @@
+2026-04-11 20:38:17,270 - module1 - DEBUG - This is the debug message
+2026-04-11 20:38:17,271 - module1 - WARNING - This is the warning message
+2026-04-11 20:38:17,271 - module2 - ERROR - This is the error message
+2026-04-11 20:38:17,271 - module2 - CRITICAL - This is the critical message
